@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('title', 128);
             $table->string('slug', 128)->unique();
 
-            $table->string('description');
+            $table->text('description');
 
             $table->timestamps();
 

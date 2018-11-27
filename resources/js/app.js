@@ -14,5 +14,6 @@ window.axios = require('axios');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/Example');
 require('./components/Post');
+require('./components/CreatePost');
+require('./components/EditPost');

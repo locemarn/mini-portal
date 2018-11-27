@@ -12,11 +12,7 @@
         <link rel="stylesheet" href="/css/app.css">
     </head>
     <body>
-        <div class="container">
-            <div class="row">
-                <div id="post" class='col-lg-12'></div>
-            </div>
-        </div>
+       @yield('content')
 
         <script src="/js/app.js"></script>
     </body>

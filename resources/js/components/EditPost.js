@@ -7,7 +7,8 @@ export default class EditPost extends Component {
     super();
     this.state = {
       title: '',
-      description: ''
+      description: '',
+      user_id: 5
     }
   }
 
@@ -20,7 +21,8 @@ export default class EditPost extends Component {
 
         this.setState({
           title: post.title,
-          description: post.description
+          description: post.description,
+          user_id: this.state.user_id
         })
       })
       .catch(err => console.log(err))
@@ -43,9 +45,7 @@ export default class EditPost extends Component {
     console.log(this.state)
 
     axios.post('/api/posts', this.state)
-      .then(res => {
-        console.log(res)
-      })
+      .then(res => console.log(res))
       .then(err => console.log(err))
     
   }

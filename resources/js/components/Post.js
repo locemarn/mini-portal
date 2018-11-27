@@ -9,18 +9,46 @@ export default class Post extends Component {
   constructor() {
     super();
     this.state = {
-      data: []
+      data: [],
+      url: '/api/posts',
+      pagination: []
     }
   }
 
   componentWillMount() {
-    axios.get('/api/posts')
+    this.fetchPosts()
+  }
+
+  fetchPosts() {
+    let $this = this
+    axios.get(this.state.url)
       .then(res => {
-        this.setState({
-          data: res.data
+        $this.setState({
+          data: $this.state.data.length > 0 ? $this.state.data.concat(res.data.data) : res.data.data,
+          url: res.data.next_page_url
         })
+        $this.makePagination(res.data)
       })
       .catch(err => console.log(err))
+  }
+
+  loadMore() {
+    this.setState({
+      url: this.state.pagination.next_page_url
+    })
+    this.fetchPosts()
+  }
+
+  makePagination(data) {
+    let pagination = {
+      current_page: data.current_page,
+      last_page: data.last_page,
+      next_page_url: data.next_page_url,
+      prev_page_url: data.prev_page_url
+    }
+    this.setState({
+      pagination: pagination
+    })
   }
 
   render() {
@@ -35,6 +63,7 @@ export default class Post extends Component {
             object={this}
           />
         ))}
+        <button className='btn btn-default mt-5 mb-5 center' onClick={this.loadMore.bind(this)}>More Results</button>
       </div>
     )
   }

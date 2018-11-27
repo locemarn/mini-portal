@@ -36240,7 +36240,9 @@ var Post = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this));
 
     _this.state = {
-      data: []
+      data: [],
+      url: '/api/posts',
+      pagination: []
     };
     return _this;
   }
@@ -36248,20 +36250,47 @@ var Post = function (_Component) {
   _createClass(Post, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var _this2 = this;
-
-      __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/api/posts').then(function (res) {
-        _this2.setState({
-          data: res.data
+      this.fetchPosts();
+    }
+  }, {
+    key: 'fetchPosts',
+    value: function fetchPosts() {
+      var $this = this;
+      __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get(this.state.url).then(function (res) {
+        $this.setState({
+          data: $this.state.data.length > 0 ? $this.state.data.concat(res.data.data) : res.data.data,
+          url: res.data.next_page_url
         });
+        $this.makePagination(res.data);
       }).catch(function (err) {
         return console.log(err);
       });
     }
   }, {
+    key: 'loadMore',
+    value: function loadMore() {
+      this.setState({
+        url: this.state.pagination.next_page_url
+      });
+      this.fetchPosts();
+    }
+  }, {
+    key: 'makePagination',
+    value: function makePagination(data) {
+      var pagination = {
+        current_page: data.current_page,
+        last_page: data.last_page,
+        next_page_url: data.next_page_url,
+        prev_page_url: data.prev_page_url
+      };
+      this.setState({
+        pagination: pagination
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
@@ -36276,9 +36305,14 @@ var Post = function (_Component) {
             key: i,
             i: i,
             post: post,
-            object: _this3
+            object: _this2
           });
-        })
+        }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { className: 'btn btn-default mt-5 mb-5 center', onClick: this.loadMore.bind(this) },
+          'More Results'
+        )
       );
     }
   }]);
@@ -59292,7 +59326,8 @@ var EditPost = function (_Component) {
 
     _this.state = {
       title: '',
-      description: ''
+      description: '',
+      user_id: 5
     };
     return _this;
   }
@@ -59309,7 +59344,8 @@ var EditPost = function (_Component) {
 
         _this2.setState({
           title: post.title,
-          description: post.description
+          description: post.description,
+          user_id: _this2.state.user_id
         });
       }).catch(function (err) {
         return console.log(err);
@@ -59336,7 +59372,7 @@ var EditPost = function (_Component) {
       console.log(this.state);
 
       axios.post('/api/posts', this.state).then(function (res) {
-        console.log(res);
+        return console.log(res);
       }).then(function (err) {
         return console.log(err);
       });

@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'DESC')->paginate(5);
 
         return response()->json($posts);
     }
@@ -82,7 +82,13 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+
+        $post->title = $request->get('title');
+        $post->description = $request->get('description');
+        $post->user_id = 5;
+
+        $post->update();
     }
 
     /**

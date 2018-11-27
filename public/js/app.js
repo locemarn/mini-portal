@@ -13974,8 +13974,9 @@ window.axios = __webpack_require__(1);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(56);
 __webpack_require__(40);
+__webpack_require__(48);
+__webpack_require__(55);
 
 /***/ }),
 /* 17 */
@@ -36215,6 +36216,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PostCard__ = __webpack_require__(54);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -36222,6 +36224,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -36257,28 +36261,23 @@ var Post = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'a',
+          { href: '/posts/create', className: 'btn btn-outline-primary' },
+          'Add New post'
+        ),
         this.state.data.map(function (post, i) {
-          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'card w-100 mt-5', key: i },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'card-body' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'h5',
-                { className: 'card-title' },
-                post.title
-              ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'p',
-                { className: 'card-text' },
-                post.description
-              )
-            )
-          );
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__PostCard__["a" /* default */], {
+            key: i,
+            i: i,
+            post: post,
+            object: _this3
+          });
         })
       );
     }
@@ -58996,7 +58995,162 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 
 
 /***/ }),
-/* 48 */,
+/* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+var CreatePost = function (_Component) {
+  _inherits(CreatePost, _Component);
+
+  function CreatePost() {
+    _classCallCheck(this, CreatePost);
+
+    var _this = _possibleConstructorReturn(this, (CreatePost.__proto__ || Object.getPrototypeOf(CreatePost)).call(this));
+
+    _this.state = {
+      title: '',
+      description: ''
+    };
+    return _this;
+  }
+
+  _createClass(CreatePost, [{
+    key: 'handleTitleChange',
+    value: function handleTitleChange(e) {
+      this.setState({
+        title: e.target.value
+      });
+    }
+  }, {
+    key: 'handleDescriptionChange',
+    value: function handleDescriptionChange(e) {
+      this.setState({
+        description: e.target.value
+      });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      console.log(this.state);
+
+      __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/api/posts', this.state).then(function (res) {
+        console.log(res);
+      }).then(function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'h2',
+          null,
+          'Add New Post'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'form',
+          { className: 'form-horizontal', onSubmit: this.handleSubmit.bind(this) },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'form-group' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'label',
+              { className: 'control-label col-sm-2', htmlFor: 'title' },
+              'Title:'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'col-sm-10' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
+                type: 'text',
+                className: 'form-control',
+                id: 'title',
+                name: 'title',
+                placeholder: 'Enter a title',
+                value: this.state.title,
+                onChange: this.handleTitleChange.bind(this)
+              })
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'form-group' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'label',
+              { className: 'control-label col-sm-2', htmlFor: 'title' },
+              'Title:'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'col-sm-10' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', {
+                type: 'text',
+                className: 'form-control',
+                id: 'title',
+                name: 'title',
+                placeholder: 'Enter a title',
+                value: this.state.description,
+                onChange: this.handleDescriptionChange.bind(this)
+              })
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'form-group' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'col-sm-offset-2 col-sm-10' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'button',
+                { type: 'submit', className: 'btn btn-primary' },
+                'Save'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'a',
+                { href: '/', className: 'btn btn-outline-primary' },
+                'Return'
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return CreatePost;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (CreatePost);
+
+
+if (document.getElementById('create-post')) {
+  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(CreatePost, null), document.getElementById('create-post'));
+}
+
+/***/ }),
 /* 49 */
 /***/ (function(module, exports) {
 
@@ -59007,9 +59161,107 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 /* 51 */,
 /* 52 */,
 /* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var PostCard = function (_Component) {
+  _inherits(PostCard, _Component);
+
+  function PostCard() {
+    _classCallCheck(this, PostCard);
+
+    return _possibleConstructorReturn(this, (PostCard.__proto__ || Object.getPrototypeOf(PostCard)).apply(this, arguments));
+  }
+
+  _createClass(PostCard, [{
+    key: 'deletePost',
+    value: function deletePost(post, object) {
+      console.log(post);
+
+      var $this = object;
+
+      axios.delete('/api/posts/' + post.id).then(function (res) {
+        console.log(res);
+
+        var newState = $this.state.data.slice();
+        newState.splice(newState.indexOf(post), 1);
+        $this.setState({
+          data: newState
+        });
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'card w-100 mt-5', key: this.props.i },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'card-body' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'h5',
+              { className: 'card-title' },
+              this.props.post.title
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'p',
+              { className: 'card-text' },
+              this.props.post.description
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'a',
+              { href: "/posts/" + this.props.post.id + "/edit", className: 'btn btn-sm btn-secondary' },
+              'Edit'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'a',
+              {
+                href: 'javascript:;',
+                className: 'btn btn-sm btn-danger',
+                onClick: this.deletePost.bind(this, this.props.post, this.props.object)
+              },
+              'Delete'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'small',
+              null,
+              this.props.post.id
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return PostCard;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (PostCard);
+
+/***/ }),
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59029,55 +59281,155 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var Example = function (_Component) {
-    _inherits(Example, _Component);
+var EditPost = function (_Component) {
+  _inherits(EditPost, _Component);
 
-    function Example() {
-        _classCallCheck(this, Example);
+  function EditPost() {
+    _classCallCheck(this, EditPost);
 
-        return _possibleConstructorReturn(this, (Example.__proto__ || Object.getPrototypeOf(Example)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (EditPost.__proto__ || Object.getPrototypeOf(EditPost)).call(this));
+
+    _this.state = {
+      title: '',
+      description: ''
+    };
+    return _this;
+  }
+
+  _createClass(EditPost, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      var id = this.props.id;
+
+      axios.get('/api/posts/' + id).then(function (res) {
+        var post = res.data;
+
+        _this2.setState({
+          title: post.title,
+          description: post.description
+        });
+      }).catch(function (err) {
+        return console.log(err);
+      });
     }
+  }, {
+    key: 'handleTitleChange',
+    value: function handleTitleChange(e) {
+      this.setState({
+        title: e.target.value
+      });
+    }
+  }, {
+    key: 'handleDescriptionChange',
+    value: function handleDescriptionChange(e) {
+      this.setState({
+        description: e.target.value
+      });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      console.log(this.state);
 
-    _createClass(Example, [{
-        key: 'render',
-        value: function render() {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                { className: 'container' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'row justify-content-center' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'div',
-                        { className: 'col-md-8' },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            { className: 'card' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'div',
-                                { className: 'card-header' },
-                                'Example Component'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'div',
-                                { className: 'card-body' },
-                                'I\'m an example component!'
-                            )
-                        )
-                    )
-                )
-            );
-        }
-    }]);
+      axios.post('/api/posts', this.state).then(function (res) {
+        console.log(res);
+      }).then(function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'h2',
+          null,
+          'Edit Post'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'form',
+          { className: 'form-horizontal', onSubmit: this.handleSubmit.bind(this) },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'form-group' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'label',
+              { className: 'control-label col-sm-2', htmlFor: 'title' },
+              'Title:'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'col-sm-10' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
+                type: 'text',
+                className: 'form-control',
+                id: 'title',
+                name: 'title',
+                placeholder: 'Enter a title',
+                value: this.state.title,
+                onChange: this.handleTitleChange.bind(this)
+              })
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'form-group' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'label',
+              { className: 'control-label col-sm-2', htmlFor: 'title' },
+              'Title:'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'col-sm-10' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', {
+                type: 'text',
+                className: 'form-control',
+                id: 'title',
+                name: 'title',
+                placeholder: 'Enter a title',
+                value: this.state.description,
+                onChange: this.handleDescriptionChange.bind(this)
+              })
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'form-group' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'col-sm-offset-2 col-sm-10' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'button',
+                { type: 'submit', className: 'btn btn-primary' },
+                'Update'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'a',
+                { href: '/', className: 'btn btn-outline-primary' },
+                'Return'
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
 
-    return Example;
+  return EditPost;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Example);
+/* harmony default export */ __webpack_exports__["default"] = (EditPost);
 
 
-if (document.getElementById('example')) {
-    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Example, null), document.getElementById('example'));
+if (document.getElementById('edit-post')) {
+  var id = $("#edit-post").data("id");
+  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(EditPost, { id: id }), document.getElementById('edit-post'));
 }
 
 /***/ })

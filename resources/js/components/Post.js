@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
+import PostCard from './PostCard'
+
 export default class Post extends Component {
 
   constructor() {
@@ -20,18 +22,18 @@ export default class Post extends Component {
       })
       .catch(err => console.log(err))
   }
-  
 
   render() {
     return (
       <div>
+        <a href='/posts/create' className='btn btn-outline-primary'>Add New post</a>
         {this.state.data.map((post, i) => (
-          <div className="card w-100 mt-5" key={i}>
-            <div className="card-body">
-              <h5 className="card-title">{post.title}</h5>
-              <p className="card-text">{post.description}</p>
-            </div>
-          </div>
+          <PostCard
+            key={i}
+            i={i}
+            post={post}
+            object={this}
+          />
         ))}
       </div>
     )

@@ -58986,6 +58986,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58993,6 +58995,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -59014,9 +59017,15 @@ var Post = function (_Component) {
   _createClass(Post, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var $this = this;
+      var _this2 = this;
 
-      axios;
+      __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/api/posts').then(function (res) {
+        _this2.setState({
+          data: res.data
+        });
+      }).catch(function (err) {
+        return console.log(err);
+      });
     }
   }, {
     key: 'render',
@@ -59024,29 +59033,26 @@ var Post = function (_Component) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: 'card w-75' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        this.state.data.map(function (post, i) {
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
-            { className: 'card-body' },
+            { className: 'card w-100 mt-5', key: i },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'h5',
-              { className: 'card-title' },
-              'Card title'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'p',
-              { className: 'card-text' },
-              'With supporting text below as a natural lead-in to additional content.'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'a',
-              { href: '#', className: 'btn btn-primary' },
-              'Button'
+              'div',
+              { className: 'card-body' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'h5',
+                { className: 'card-title' },
+                post.title
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'p',
+                { className: 'card-text' },
+                post.description
+              )
             )
-          )
-        )
+          );
+        })
       );
     }
   }]);

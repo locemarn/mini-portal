@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import axios from 'axios'
 
 export default class Post extends Component {
 
@@ -11,22 +12,27 @@ export default class Post extends Component {
   }
 
   componentWillMount() {
-    let $this = this
-
-    axios
+    axios.get('/api/posts')
+      .then(res => {
+        this.setState({
+          data: res.data
+        })
+      })
+      .catch(err => console.log(err))
   }
   
 
   render() {
     return (
       <div>
-        <div className="card w-75">
-          <div className="card-body">
-            <h5 className="card-title">Card title</h5>
-            <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" className="btn btn-primary">Button</a>
+        {this.state.data.map((post, i) => (
+          <div className="card w-100 mt-5" key={i}>
+            <div className="card-body">
+              <h5 className="card-title">{post.title}</h5>
+              <p className="card-text">{post.description}</p>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     )
   }

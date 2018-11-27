@@ -12,7 +12,11 @@
         <link rel="stylesheet" href="/css/app.css">
     </head>
     <body>
-        <div id="example"></div>
+        <div class="container">
+            <div class="row">
+                <div id="post" class='col-lg-12'></div>
+            </div>
+        </div>
 
         <script src="/js/app.js"></script>
     </body>

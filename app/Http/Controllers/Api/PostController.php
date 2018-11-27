@@ -42,6 +42,7 @@ class PostController extends Controller
         
         $post->title = $request->get('title');
         $post->description = $request->get('description');
+        $post->user_id = $request->get('user_id');
         
         $post->save();
 

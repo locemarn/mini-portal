@@ -9,7 +9,6 @@ $factory->define(App\Post::class, function (Faker $faker) {
     return [
         'user_id'       => rand(1,5),
         'title'         => $title,
-        'slug'          => str_slug($title),
         'description'   => $faker->text(300)
     ];
 });

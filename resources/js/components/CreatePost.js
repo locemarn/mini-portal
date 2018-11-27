@@ -8,7 +8,8 @@ export default class CreatePost extends Component {
     super();
     this.state = {
       title: '',
-      description: ''
+      description: '',
+      user_id: 5
     }
   }
 

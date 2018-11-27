@@ -59028,7 +59028,8 @@ var CreatePost = function (_Component) {
 
     _this.state = {
       title: '',
-      description: ''
+      description: '',
+      user_id: 5
     };
     return _this;
   }

@@ -18,8 +18,7 @@ class CreatePostsTable extends Migration
 
             $table->integer('user_id')->unsigned();
             
-            $table->string('title', 128);
-            $table->string('slug', 128)->unique();
+            $table->string('title', 128)->unique();
 
             $table->text('description');
 

@@ -12,7 +12,7 @@ export default class Post extends Component {
 
   componentWillMount() {
     let $this = this
-    
+
   }
   
 

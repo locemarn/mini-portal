@@ -8,12 +8,14 @@ export default class EditPost extends Component {
     this.state = {
       title: '',
       description: '',
-      user_id: 5
+      user_id: ''
     }
   }
 
   componentWillMount() {
     let id = this.props.id
+    let userId = this.props.user_id
+    console.log(this.props.user_id)
 
     axios.get('/api/posts/'+id)
       .then(res => {
@@ -22,7 +24,7 @@ export default class EditPost extends Component {
         this.setState({
           title: post.title,
           description: post.description,
-          user_id: this.state.user_id
+          user_id: post.user_id
         })
       })
       .catch(err => console.log(err))
@@ -44,7 +46,7 @@ export default class EditPost extends Component {
     e.preventDefault()
     console.log(this.state)
 
-    axios.post('/api/posts', this.state)
+    axios.post('/api/posts/'+id, this.state)
       .then(res => console.log(res))
       .then(err => console.log(err))
     
@@ -87,8 +89,9 @@ export default class EditPost extends Component {
 
           <div className='form-group'>
             <div className='col-sm-offset-2 col-sm-10'>
-              <button type='submit' className='btn btn-primary'>Update</button>
-              <a href='/' className='btn btn-outline-primary'>Return</a>
+              <button type='submit' 
+                 className='btn btn-primary'>Update</button>
+              <a href='/home' className='btn btn-outline-primary'>Return</a>
             </div>
           </div>
         </form>

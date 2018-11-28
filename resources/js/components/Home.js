@@ -63,6 +63,7 @@ export default class Home extends Component {
               <HomePost
                 id={post.id}
                 posts={post}
+                user_id={post.user_id}
               />
               <div className="text-right">Created at: {post.created_at}</div>
               </div>

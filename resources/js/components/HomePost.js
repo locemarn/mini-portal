@@ -32,6 +32,7 @@ export default class HomePost extends Component {
   }
 
   render() {
+    console.log(this.props.user_id)
     return (
       <div>
         <a
@@ -41,7 +42,11 @@ export default class HomePost extends Component {
         >
           Delete
         </a>
-        <a className='btn btn-outline-dark'>
+        <a 
+          href={"/posts/"+this.props.id+"/edit"}
+          user_id={this.props.user_id}
+          id={this.props.id}
+          className='btn btn-outline-dark'>
           Edit
         </a>
       </div>

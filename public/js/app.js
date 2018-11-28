@@ -59227,7 +59227,7 @@ var EditPost = function (_Component) {
     _this.state = {
       title: '',
       description: '',
-      user_id: 5
+      user_id: ''
     };
     return _this;
   }
@@ -59238,6 +59238,8 @@ var EditPost = function (_Component) {
       var _this2 = this;
 
       var id = this.props.id;
+      var userId = this.props.user_id;
+      console.log(this.props.user_id);
 
       axios.get('/api/posts/' + id).then(function (res) {
         var post = res.data;
@@ -59245,7 +59247,7 @@ var EditPost = function (_Component) {
         _this2.setState({
           title: post.title,
           description: post.description,
-          user_id: _this2.state.user_id
+          user_id: post.user_id
         });
       }).catch(function (err) {
         return console.log(err);
@@ -59271,7 +59273,7 @@ var EditPost = function (_Component) {
       e.preventDefault();
       console.log(this.state);
 
-      axios.post('/api/posts', this.state).then(function (res) {
+      axios.post('/api/posts/' + id, this.state).then(function (res) {
         return console.log(res);
       }).then(function (err) {
         return console.log(err);
@@ -59343,12 +59345,13 @@ var EditPost = function (_Component) {
               { className: 'col-sm-offset-2 col-sm-10' },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'button',
-                { type: 'submit', className: 'btn btn-primary' },
+                { type: 'submit',
+                  className: 'btn btn-primary' },
                 'Update'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'a',
-                { href: '/', className: 'btn btn-outline-primary' },
+                { href: '/home', className: 'btn btn-outline-primary' },
                 'Return'
               )
             )
@@ -59772,7 +59775,8 @@ var Home = function (_Component) {
               { className: 'card-footer bg-transparent border-dark fot' },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__HomePost__["a" /* default */], {
                 id: post.id,
-                posts: post
+                posts: post,
+                user_id: post.user_id
               }),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
@@ -59868,6 +59872,7 @@ var HomePost = function (_Component) {
   _createClass(HomePost, [{
     key: 'render',
     value: function render() {
+      console.log(this.props.user_id);
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
@@ -59882,7 +59887,11 @@ var HomePost = function (_Component) {
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'a',
-          { className: 'btn btn-outline-dark' },
+          {
+            href: "/posts/" + this.props.id + "/edit",
+            user_id: this.props.user_id,
+            id: this.props.id,
+            className: 'btn btn-outline-dark' },
           'Edit'
         )
       );

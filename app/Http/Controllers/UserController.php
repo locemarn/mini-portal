@@ -90,9 +90,4 @@ class UserController extends Controller
     {
         //
     }
-
-    public function liberar($id)
-    {
-        dd($id);
-    }
 }

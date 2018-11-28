@@ -3,6 +3,14 @@ import ReactDOM from 'react-dom'
 
 export default class PostCard extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    }
+  }
+  
+
   deletePost(post, object) {
     console.log(post)
     

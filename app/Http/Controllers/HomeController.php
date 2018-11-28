@@ -52,4 +52,13 @@ class HomeController extends Controller
 
         return view('home', compact('posts'));
     }
+
+    public function destroy($id)
+    {
+        $post = Post::find($id);
+
+        $post->delete();
+
+        return view('/home')->with('message', 'Post excluded with successfully.');
+    }
 }

@@ -88,6 +88,10 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+        $post->delete();
+
+        return response()->json('Post deleted successfully.');
     }
 }

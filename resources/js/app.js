@@ -19,3 +19,5 @@ require('./components/CreatePost');
 require('./components/EditPost');
 
 require('./components/User');
+
+require('./components/Home');

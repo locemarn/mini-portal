@@ -17,3 +17,5 @@ window.axios = require('axios');
 require('./components/Post');
 require('./components/CreatePost');
 require('./components/EditPost');
+
+require('./components/User');

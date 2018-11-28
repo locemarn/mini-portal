@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
-import PostCard from './PostCard'
-
 export default class Post extends Component {
 
   constructor() {
-    super();
+    super()
     this.state = {
       data: [],
       url: '/api/posts',

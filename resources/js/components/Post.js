@@ -54,14 +54,13 @@ export default class Post extends Component {
   render() {
     return (
       <div>
-        <a href='/posts/create' className='btn btn-outline-primary'>Add New post</a>
         {this.state.data.map((post, i) => (
-          <PostCard
-            key={i}
-            i={i}
-            post={post}
-            object={this}
-          />
+          <div className="card bg-light mt-3" key={i}>
+          <div className="card-header"><h5>{post.title}</h5></div>
+          <div className="card-body">
+            <p className="card-text">{post.description}</p>
+          </div>
+        </div>
         ))}
         <button className='btn btn-default mt-5 mb-5 center' onClick={this.loadMore.bind(this)}>More Results</button>
       </div>
